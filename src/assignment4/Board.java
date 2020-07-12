@@ -3,9 +3,15 @@ package assignment4;
 public class Board {
 
     // board size
-    public static int ROWS = 6;
-    public static int COLUMNS = 7;
+    private static int ROWS = 6;
+    private static int COLUMNS = 7;
     public static char EMPTY = ' ';
+
+    public static int getROWS(){return ROWS;}
+    public static int getCOLUMNS(){return COLUMNS;}
+
+    public static void setROWS(int rows) {ROWS=rows;}
+    public static void setCOLUMNS(int columns) {COLUMNS=columns;}
 
     public static void initializeBoard(char[][] board) {
         for (int i = 0; i < ROWS; i++)

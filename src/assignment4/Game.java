@@ -2,11 +2,13 @@ package assignment4;
 
 import java.util.Scanner;
 
+import static assignment4.Menu.*;
+
 public class Game {
 
     // first index is row (horizontal), second is column (vertical)
     // [0,0] is the top left board cell
-    public static char[][] board = new char[Board.ROWS][Board.COLUMNS];
+    public static char[][] board;
 
     // how many discs to win
     public static int WIN = 4;
@@ -58,7 +60,7 @@ public class Game {
 
             do {
                 badchoice = false;
-                Menu.printMenu();
+                printMenu();
                 choice = Integer.parseInt(terminalInput.nextLine()); // no exception handling...
                 badchoice = choice < 0 || choice > 2;
                 if (badchoice) {
@@ -72,6 +74,15 @@ public class Game {
                 terminalInput.close();
                 return;
             }
+
+            //Board.setROWS(4);    // optional
+            //Board.setCOLUMNS(4); // optional
+
+            int rows = Board.getROWS();
+            int columns = Board.getCOLUMNS();
+
+            board = new char[rows][columns];
+
             // start the game
             Board.initializeBoard(board);
             System.out.println();
@@ -84,14 +95,19 @@ public class Game {
             computerplays = false;
             if (choice == 2) {
                 computerplays = true;
+
             }
+
+            VirtualPlayerFactory virtualPlayerFactory = new VirtualPlayerFactory();
+            GameModes mode = GameModes.MEDIUM;
+            VirtualPlayer computer = virtualPlayerFactory.getVirtialPlayer(mode);
 
             do {
                 // loop as long as the chosen column is full
                 // we request the player to enter a column which is not full
                 do {
                     if (computerplays && currentPlayer == XPLAYER) {
-                        col = VirtualPlayer.computerChoice(board);
+                        col = computer.computerChoice(board);
                         System.out.print("Computer put a disk in column ");
                         System.out.println(col + 1);
                         //System.out.println();
@@ -104,7 +120,7 @@ public class Game {
                     row = -1;
 
                     // is this really a column number?
-                    if (col < 0 || col >= Board.COLUMNS)
+                    if (col < 0 || col >= Board.getCOLUMNS())
                         System.out.println("Illegal column number");
                     else
                         // find the row and check if winning
