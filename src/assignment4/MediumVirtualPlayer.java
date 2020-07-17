@@ -10,7 +10,7 @@ public class MediumVirtualPlayer implements VirtualPlayer {
             if (!Board.isColumnFull(board,i)) {
                 emptyrow = Board.firstEmptyRow(board,i);
                 board[emptyrow][i] = Game.XPLAYER;
-                if (Board.winningDisk(board, emptyrow, i)) {
+                if (Game.winningDisk(board, emptyrow, i)) {
                     board[emptyrow][i] = Board.EMPTY; // reset
                     return i;
                 }
@@ -25,7 +25,7 @@ public class MediumVirtualPlayer implements VirtualPlayer {
             if (!Board.isColumnFull(board,i)) {
                 emptyrow = Board.firstEmptyRow(board,i);
                 board[emptyrow][i] = Game.OPLAYER; // assume the other player does this
-                if (Board.winningDisk(board, emptyrow, i)) {
+                if (Game.winningDisk(board, emptyrow, i)) {
                     board[emptyrow][i] = Board.EMPTY; // reset
                     counter++; // we found a winning disc
                     chosenrow = i; // remember the row

@@ -13,10 +13,28 @@ title __ASSIGNMENT4's Class Diagram__\n
         {static} + getROWS()
         {static} + initializeBoard()
         {static} + isColumnFull()
-        {static} + printBoard()
         {static} + setCOLUMNS()
         {static} + setROWS()
-        {static} + winningDisk()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.ConsoleUI {
+        + printBoard()
+        + printMenu()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.DebugProxy {
+        - obj : Object
+        {static} - writer : PrintWriter
+        {static} + close_inner_file()
+        + invoke()
+        {static} + newInstance()
+        - DebugProxy()
     }
   }
   
@@ -42,6 +60,7 @@ title __ASSIGNMENT4's Class Diagram__\n
         {static} + play()
         {static} + playerNum()
         {static} + showWinner()
+        {static} + winningDisk()
     }
   }
   
@@ -70,17 +89,18 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
-    class assignment4.Menu {
-        {static} + printMenu()
+    enum MenuOptions {
+      Exit
+      MultiPlayer
+      SinglePlayer
     }
   }
   
 
   namespace assignment4 {
-    enum MenuOptions {
-      Exit
-      MultiPlayer
-      SinglePlayer
+    interface assignment4.UserInterface {
+        {abstract} + printBoard()
+        {abstract} + printMenu()
     }
   }
   
@@ -99,6 +119,8 @@ title __ASSIGNMENT4's Class Diagram__\n
   }
   
 
+  assignment4.ConsoleUI .up.|> assignment4.UserInterface
+  assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
   assignment4.EasyVirtualPlayer .up.|> assignment4.VirtualPlayer
   assignment4.MediumVirtualPlayer .up.|> assignment4.VirtualPlayer
 

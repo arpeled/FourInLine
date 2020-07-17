@@ -9,6 +9,18 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
+    class assignment4.ConsoleUI {
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.DebugProxy {
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.EasyVirtualPlayer {
     }
   }
@@ -39,13 +51,13 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
-    class assignment4.Menu {
+    enum MenuOptions {
     }
   }
   
 
   namespace assignment4 {
-    enum MenuOptions {
+    interface assignment4.UserInterface {
     }
   }
   
@@ -69,13 +81,23 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace tests {
+    class tests.UserInerfaceTests {
+    }
+  }
+  
+
+  namespace tests {
     class tests.VirtualPlayerTest {
     }
   }
   
 
+  assignment4.ConsoleUI .up.|> assignment4.UserInterface
+  assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
   assignment4.EasyVirtualPlayer .up.|> assignment4.VirtualPlayer
   assignment4.MediumVirtualPlayer .up.|> assignment4.VirtualPlayer
+  tests.BoardTests o-- assignment4.UserInterface : userInterface
+  tests.VirtualPlayerTest o-- assignment4.UserInterface : userInterface
 
 
 right footer

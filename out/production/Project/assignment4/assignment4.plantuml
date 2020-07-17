@@ -70,7 +70,7 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
-    class assignment4.Menu {
+    class assignment4.ConsoleUI {
         {static} + printMenu()
     }
   }

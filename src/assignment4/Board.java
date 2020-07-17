@@ -19,21 +19,6 @@ public class Board {
                 board[i][j] = EMPTY;
     }
 
-    public static void printBoard(char[][] board) {
-        System.out.println("Printing board:");
-        System.out.println();
-        for (int j = 0; j < ROWS; j++) {
-            System.out.print("|");
-            for (int k = 0; k < COLUMNS; k++)
-                System.out.print(board[j][k] + "|");
-            System.out.println();
-        }
-        for (int k = 0; k < 2*COLUMNS+1; k++)
-            System.out.print("-");
-        System.out.println();
-        System.out.println();
-    }
-
     public static boolean isColumnFull(char[][] board, int colIndex){
         for (int i = 0; i < ROWS; i++) {
             if (board[i][colIndex] == EMPTY)
@@ -48,99 +33,6 @@ public class Board {
             if (board[i][colIndex] == EMPTY) return i;
         }
         return -1;
-    }
-
-    // is the disc at board[rowIndex][colIndex] winning?
-    public static boolean winningDisk(char[][] board, int rowIndex, int colIndex){
-        char c = board[rowIndex][colIndex];
-        int count = 1;
-
-        // horizontal right
-        for (int i=colIndex+1; i < COLUMNS; i++) {
-            if (board[rowIndex][i]==c)
-                count++;
-            else break;
-        }
-        if (count >= Game.WIN)
-        {
-            return true; // won horizontally
-        }
-        // keep counting horizontal left
-        for (int i=colIndex-1; i >=0; i--) {
-            if (board[rowIndex][i]==c)
-                count++;
-            else break;
-        }
-        if (count >= Game.WIN) return true; // won horizontally
-
-        count = 1;
-        // vertical down
-        for (int i=rowIndex+1; i < ROWS; i++) {
-            if (board[i][colIndex]==c)
-                count++;
-            else break;
-        }
-        if (count >= Game.WIN) return true; // won vertical
-        // keep counting vertical up
-        for (int i=rowIndex-1; i >=0; i--) {
-            if (board[i][colIndex]==c)
-                count++;
-            else
-                break;
-        }
-        if (count >= Game.WIN) return true; // won vertical
-
-        // first diagonal:  /
-        count = 1;
-        // up
-        int kol = colIndex+1;
-        for (int i=rowIndex-1; i >= 0; i--) {
-            if (kol>=COLUMNS) break; // we reached the end of the board right side
-            if (board[i][kol]==c)
-                count++;
-            else
-                break;
-            kol++;
-        }
-        if (count >= Game.WIN) return true;
-        // keep counting down
-        kol = colIndex-1;
-        for (int i=rowIndex+1; i < ROWS; i++) {
-            if (kol<0) break; // we reached the end of the board left side
-            if (board[i][kol]==c)
-                count++;
-            else
-                break;
-            kol--;
-        }
-        if (count >= Game.WIN) return true; // won diagonal "/"
-
-        // second diagonal : \
-        count = 1;
-        // up
-        kol = colIndex-1;
-        for (int i=rowIndex-1; i >= 0; i--) {
-            if (kol<0) break; // we reached the end of the board left side
-            if (board[i][kol]==c)
-                count++;
-            else
-                break;
-            kol--;
-        }
-        if (count >= Game.WIN) return true; // won diagonal "\"
-        // keep counting down
-        kol = colIndex+1;
-        for (int i=rowIndex+1; i < ROWS; i++) {
-            if (kol>=COLUMNS) break; // we reached the end of the board right side
-            if (board[i][kol]==c)
-                count++;
-            else
-                break;
-            kol++;
-        }
-        if (count >= Game.WIN) return true; // won diagonal "\"
-
-        return false;
     }
 
     public static boolean boardIsFull(char[][] board) {
