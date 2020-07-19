@@ -1,7 +1,5 @@
 package assignment4;
 
-import java.util.Scanner;
-
 public class Game {
 
     // first index is row (horizontal), second is column (vertical)
@@ -130,41 +128,20 @@ public class Game {
         return false;
     }
 
-    public static void showWinner(char winner,boolean isComp) {
-        if (winner == EMPTY)
-            System.out.print("Board is full! game has ended with a tie!");
-        else
-        if (isComp && playerNum(winner)==2) System.out.println("Game has ended! The computer won!");
-        else System.out.println("Game has ended! Player " + playerNum(winner) + " won!");
-        System.out.println();
-    }
-
     public static void play()
     {
-        Scanner terminalInput = new Scanner(System.in);
         UserInterface userInterface = new ConsoleUI();
 
-
-        int choice, row, col;
-        boolean badchoice = true;
+        int choice, row, col = 0;
 
         // each loop is a new game
         while (true) {
 
-            do {
-                badchoice = false;
-                userInterface.printMenu();
-                choice = Integer.parseInt(terminalInput.nextLine()); // no exception handling...
-                badchoice = choice < 0 || choice > 2;
-                if (badchoice) {
-                    System.out.println("Input incorrect! Please try again.");
-                }
-            } while (badchoice);
+            choice = userInterface.printMenu();
 
             // 0: quit the game
-            if (choice == 0) {
-                System.out.println("Bye bye!");
-                terminalInput.close();
+            if (choice == MenuOptions.Exit.ordinal()) {
+                userInterface.exit();
                 return;
             }
 
@@ -186,37 +163,38 @@ public class Game {
             currentPlayer = OPLAYER;
             gameover = false;
             computerplays = false;
+
+            Player computer = null;
+
             if (choice == 2) {
                 computerplays = true;
-
+                VirtualPlayerFactory virtualPlayerFactory = new VirtualPlayerFactory();
+                GameModes mode = GameModes.MEDIUM;
+                computer = virtualPlayerFactory.getVirtialPlayer(mode);
+                computer = (Player) DebugProxy.newInstance(new ComputerPlayerMedium());
             }
-
-            VirtualPlayerFactory virtualPlayerFactory = new VirtualPlayerFactory();
-            GameModes mode = GameModes.MEDIUM;
-            VirtualPlayer computer = virtualPlayerFactory.getVirtialPlayer(mode);
-            computer = (VirtualPlayer) DebugProxy.newInstance(new MediumVirtualPlayer());
 
             do {
                 // loop as long as the chosen column is full
                 // we request the player to enter a column which is not full
                 do {
                     if (computerplays && currentPlayer == XPLAYER) {
-                        col = computer.computerChoice(board);
-                        System.out.print("Computer put a disk in column ");
-                        System.out.println(col + 1);
-                        //System.out.println();
-                    } else {
-                        System.out.print("Player " + playerNum(currentPlayer) + ", choose a column: ");
-                        col = Integer.parseInt(terminalInput.nextLine()); // no exception handling...
+                        col = computer.MakeAChoise(board);
+                        userInterface.computerPlayerTurn(col);
+                    }
+                    else
+                    {
+                        col = userInterface.humanPlayerTurn(playerNum(currentPlayer));
                         col--; // the real index
                     }
 
                     row = -1;
 
                     // is this really a column number?
-                    if (col < 0 || col >= Board.getCOLUMNS())
+                    if (col < 0 || col >= Board.getCOLUMNS()) {
                         System.out.println("Illegal column number");
-                    else
+                    }
+                    else {
                         // find the row and check if winning
                         if (!Board.isColumnFull(board, col)) {
                             row = Board.firstEmptyRow(board, col);
@@ -224,7 +202,7 @@ public class Game {
                         } else
                             // column is full, try again
                             System.out.println("Column is full.");
-
+                    }
                 } while (row == -1);
                 // now we have a valid (row,col) cell
 
@@ -235,15 +213,17 @@ public class Game {
 
                 if (winningDisk(board, row, col)) {
                     gameover = true;
-                    showWinner(currentPlayer, computerplays);
+                    userInterface.showWinner(currentPlayer, computerplays, playerNum(currentPlayer));
                 } else if (Board.boardIsFull(board)) {
                     gameover = true;
-                    showWinner(EMPTY, computerplays); // tie
+                    userInterface.showWinner(EMPTY, computerplays, playerNum(EMPTY)); // tie
                 }
                 // switch to next player
                 changePlayer();
 
             } while (!gameover);
+
+            DebugProxy.close_inner_file();
         }
     }
 }

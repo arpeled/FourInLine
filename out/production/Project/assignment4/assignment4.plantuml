@@ -13,17 +13,48 @@ title __ASSIGNMENT4's Class Diagram__\n
         {static} + getROWS()
         {static} + initializeBoard()
         {static} + isColumnFull()
-        {static} + printBoard()
         {static} + setCOLUMNS()
         {static} + setROWS()
-        {static} + winningDisk()
     }
   }
   
 
   namespace assignment4 {
-    class assignment4.EasyVirtualPlayer {
-        + computerChoice()
+    class assignment4.ComputerPlayerEasy {
+        + MakeAChoise()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.ComputerPlayerMedium {
+        + MakeAChoise()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.ConsoleUI {
+        ~ terminalInput : Scanner
+        + ComputerPlayerTurn()
+        + ConsoleUI()
+        + HumanPlayerTurn()
+        + exit()
+        + printBoard()
+        + printMenu()
+        + showWinner()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.DebugProxy {
+        - obj : Object
+        {static} - writer : PrintWriter
+        {static} + close_inner_file()
+        + invoke()
+        {static} + newInstance()
+        - DebugProxy()
     }
   }
   
@@ -41,7 +72,13 @@ title __ASSIGNMENT4's Class Diagram__\n
         {static} + changePlayer()
         {static} + play()
         {static} + playerNum()
-        {static} + showWinner()
+        {static} + winningDisk()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.GameAspect {
     }
   }
   
@@ -49,8 +86,8 @@ title __ASSIGNMENT4's Class Diagram__\n
   namespace assignment4 {
     enum GameModes {
       EASY
-      HARD
       MEDIUM
+      STRONG
     }
   }
   
@@ -58,20 +95,6 @@ title __ASSIGNMENT4's Class Diagram__\n
   namespace assignment4 {
     class assignment4.Main {
         {static} + main()
-    }
-  }
-  
-
-  namespace assignment4 {
-    class assignment4.MediumVirtualPlayer {
-        + computerChoice()
-    }
-  }
-  
-
-  namespace assignment4 {
-    class assignment4.ConsoleUI {
-        {static} + printMenu()
     }
   }
   
@@ -86,8 +109,20 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
-    interface assignment4.VirtualPlayer {
-        {abstract} + computerChoice()
+    interface assignment4.Player {
+        {abstract} + MakeAChoise()
+    }
+  }
+  
+
+  namespace assignment4 {
+    interface assignment4.UserInterface {
+        {abstract} + ComputerPlayerTurn()
+        {abstract} + HumanPlayerTurn()
+        {abstract} + exit()
+        {abstract} + printBoard()
+        {abstract} + printMenu()
+        {abstract} + showWinner()
     }
   }
   
@@ -99,8 +134,19 @@ title __ASSIGNMENT4's Class Diagram__\n
   }
   
 
-  assignment4.EasyVirtualPlayer .up.|> assignment4.VirtualPlayer
-  assignment4.MediumVirtualPlayer .up.|> assignment4.VirtualPlayer
+  assignment4.ComputerPlayerEasy .up.|> assignment4.Player
+  assignment4.ComputerPlayerMedium .up.|> assignment4.Player
+  assignment4.Player .up.|> assignment4.VirtualPlayerFactory
+  assignment4.ConsoleUI .up.|> assignment4.UserInterface
+  assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
+  assignment4.MenuOptions .left.|> assignment4.ConsoleUI
+  assignment4.GameModes .right.|> assignment4.VirtualPlayerFactory
+
+  assignment4.Main --> assignment4.Game
+  assignment4.Game --> assignment4.UserInterface
+  assignment4.Game --> assignment4.Board
+  assignment4.Game --> assignment4.VirtualPlayerFactory
+
 
 
 right footer

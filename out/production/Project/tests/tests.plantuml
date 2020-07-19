@@ -5,21 +5,35 @@ title __TESTS's Class Diagram__\n
   namespace tests {
     class tests.BoardTests {
         {static} + board : char[][]
+        + boardIsFullTest()
+        + firstEmptyRowTest()
         + fullColTest()
         + initializeBoardTest()
+        + setBoardSizeTest()
     }
   }
   
 
   namespace tests {
-    class tests.VirtualPlayerTest {
+    class tests.PlayerTest {
         {static} + board : char[][]
         + computerFullBoardChoiseTest()
-        + computerWinnigChoiseTest()
+        + computerWinnigChoiseEasyTest()
+        + computerWinnigChoiseMediumTest()
     }
   }
   
 
+  namespace tests {
+    class tests.UserInerfaceTests {
+        + printBoardTest()
+        + printMenuTest()
+    }
+  }
+  
+
+  tests.BoardTests o-- assignment4.UserInterface : userInterface
+  tests.PlayerTest o-- assignment4.UserInterface : userInterface
 
 
 right footer

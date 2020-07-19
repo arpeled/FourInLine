@@ -15,15 +15,7 @@ title __TESTS's Class Diagram__\n
   
 
   namespace tests {
-    class tests.UserInerfaceTests {
-        + printBoardTest()
-        + printMenuTest()
-    }
-  }
-  
-
-  namespace tests {
-    class tests.VirtualPlayerTest {
+    class tests.PlayerTest {
         {static} + board : char[][]
         + computerFullBoardChoiseTest()
         + computerWinnigChoiseEasyTest()
@@ -32,8 +24,16 @@ title __TESTS's Class Diagram__\n
   }
   
 
+  namespace tests {
+    class tests.UserInerfaceTests {
+        + printBoardTest()
+        + printMenuTest()
+    }
+  }
+  
+
   tests.BoardTests o-- assignment4.UserInterface : userInterface
-  tests.VirtualPlayerTest o-- assignment4.UserInterface : userInterface
+  tests.PlayerTest o-- assignment4.UserInterface : userInterface
 
 
 right footer

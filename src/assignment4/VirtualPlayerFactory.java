@@ -2,18 +2,19 @@ package assignment4;
 
 public class VirtualPlayerFactory {
 
-    public VirtualPlayer getVirtialPlayer(GameModes mode){
-        if(mode == GameModes.EASY){
-            return new MediumVirtualPlayer();
+    public Player getVirtialPlayer(GameModes mode){
+        if(mode == GameModes.EASY)
+        {
+            return new ComputerPlayerMedium();
         }
         if(mode == GameModes.MEDIUM)
         {
-            return new MediumVirtualPlayer();
+            return new ComputerPlayerMedium();
 
         }
-        if(mode == GameModes.HARD)
+        if(mode == GameModes.STRONG)
         {
-            return new MediumVirtualPlayer();
+            return new ComputerPlayerMedium(); // FIXME: need to implement strong computer player
         }
 
         return null;

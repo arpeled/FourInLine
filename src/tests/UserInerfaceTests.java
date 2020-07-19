@@ -12,9 +12,9 @@ public class UserInerfaceTests {
     @Test
     public void printMenuTest()
     {
-        UserInterface userInterface;
-        userInterface = new ConsoleUI();
-        userInterface.printMenu();
+        //UserInterface userInterface;
+        //userInterface = new ConsoleUI();
+        //userInterface.printMenu();
     }
 
     @Test
@@ -31,5 +31,23 @@ public class UserInerfaceTests {
         Board.initializeBoard(board);
 
         userInterface.printBoard(board);
+    }
+
+    @Test
+    public void computerPlayerTurnTest()
+    {
+        UserInterface userInterface;
+        userInterface = new ConsoleUI();
+
+        userInterface.computerPlayerTurn(3);
+    }
+
+    @Test
+    public void showWinnerTest()
+    {
+        UserInterface userInterface;
+        userInterface = new ConsoleUI();
+
+        userInterface.showWinner(' ', true, 2);
     }
 }

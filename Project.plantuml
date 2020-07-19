@@ -9,6 +9,18 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
+    class assignment4.ComputerPlayerEasy {
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.ComputerPlayerMedium {
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.ConsoleUI {
     }
   }
@@ -21,13 +33,13 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
-    class assignment4.EasyVirtualPlayer {
+    class assignment4.Game {
     }
   }
   
 
   namespace assignment4 {
-    class assignment4.Game {
+    class assignment4.GameAspect {
     }
   }
   
@@ -45,25 +57,19 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
-    class assignment4.MediumVirtualPlayer {
-    }
-  }
-  
-
-  namespace assignment4 {
     enum MenuOptions {
     }
   }
   
 
   namespace assignment4 {
-    interface assignment4.UserInterface {
+    interface assignment4.Player {
     }
   }
   
 
   namespace assignment4 {
-    interface assignment4.VirtualPlayer {
+    interface assignment4.UserInterface {
     }
   }
   
@@ -81,23 +87,23 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace tests {
-    class tests.UserInerfaceTests {
+    class tests.PlayerTest {
     }
   }
   
 
   namespace tests {
-    class tests.VirtualPlayerTest {
+    class tests.UserInerfaceTests {
     }
   }
   
 
+  assignment4.ComputerPlayerEasy .up.|> assignment4.Player
+  assignment4.ComputerPlayerMedium .up.|> assignment4.Player
   assignment4.ConsoleUI .up.|> assignment4.UserInterface
   assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
-  assignment4.EasyVirtualPlayer .up.|> assignment4.VirtualPlayer
-  assignment4.MediumVirtualPlayer .up.|> assignment4.VirtualPlayer
   tests.BoardTests o-- assignment4.UserInterface : userInterface
-  tests.VirtualPlayerTest o-- assignment4.UserInterface : userInterface
+  tests.PlayerTest o-- assignment4.UserInterface : userInterface
 
 
 right footer
