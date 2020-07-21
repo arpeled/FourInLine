@@ -1,22 +1,39 @@
 package assignment4;
 
+import java.util.HashMap;
+
 public class VirtualPlayerFactory {
 
-    public Player getVirtialPlayer(GameModes mode){
+    private static final HashMap<String, VirtualPlayer> virtualPlayerMap = new HashMap<>();
+
+    public VirtualPlayer getVirtialPlayer(GameModes mode) {
+
+        VirtualPlayer virtualPlayer;
+
+        if (virtualPlayerMap.containsKey(mode))
+        {
+            return virtualPlayerMap.get(mode);
+        }
+
         if(mode == GameModes.EASY)
         {
-            return new ComputerPlayerMedium();
+            virtualPlayer = new VirtualPlayerEasy();
         }
-        if(mode == GameModes.MEDIUM)
+        else if(mode == GameModes.MEDIUM)
         {
-            return new ComputerPlayerMedium();
-
+            virtualPlayer = new VirtualPlayerMedium();
         }
-        if(mode == GameModes.STRONG)
+        //else if(mode == GameModes.STRONG)
+        //{
+        //    virtualPlayer = new ComputerPlayerMedium(); // FIXME: need to implement strong computer player
+        //}
+        else
         {
-            return new ComputerPlayerMedium(); // FIXME: need to implement strong computer player
+            virtualPlayer = new VirtualPlayerMedium();
         }
 
-        return null;
+        virtualPlayerMap.put(mode.toString(), virtualPlayer);
+
+        return virtualPlayer;
     }
 }

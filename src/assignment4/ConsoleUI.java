@@ -43,13 +43,13 @@ public class ConsoleUI implements UserInterface {
     public void printBoard(char[][] board) {
         System.out.println("Printing board:");
         System.out.println();
-        for (int j = 0; j < Board.getROWS(); j++) {
+        for (int j = 0; j < Board.ROWS; j++) {
             System.out.print("|");
-            for (int k = 0; k < Board.getCOLUMNS(); k++)
+            for (int k = 0; k < Board.COLUMNS; k++)
                 System.out.print(board[j][k] + "|");
             System.out.println();
         }
-        for (int k = 0; k < 2*Board.getCOLUMNS()+1; k++)
+        for (int k = 0; k < 2*Board.COLUMNS+1; k++)
             System.out.print("-");
         System.out.println();
         System.out.println();

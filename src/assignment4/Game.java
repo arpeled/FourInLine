@@ -2,9 +2,8 @@ package assignment4;
 
 public class Game {
 
-    // first index is row (horizontal), second is column (vertical)
-    // [0,0] is the top left board cell
-    public static char[][] board;
+    public static Board board;
+    //public static DecoratedBoard board;
 
     // how many discs to win
     public static int WIN = 4;
@@ -41,7 +40,7 @@ public class Game {
         int count = 1;
 
         // horizontal right
-        for (int i=colIndex+1; i < Board.getCOLUMNS(); i++) {
+        for (int i=colIndex+1; i < Board.COLUMNS; i++) {
             if (board[rowIndex][i]==c)
                 count++;
             else break;
@@ -60,7 +59,7 @@ public class Game {
 
         count = 1;
         // vertical down
-        for (int i=rowIndex+1; i < Board.getROWS(); i++) {
+        for (int i=rowIndex+1; i < Board.ROWS; i++) {
             if (board[i][colIndex]==c)
                 count++;
             else break;
@@ -80,7 +79,7 @@ public class Game {
         // up
         int kol = colIndex+1;
         for (int i=rowIndex-1; i >= 0; i--) {
-            if (kol>=Board.getCOLUMNS()) break; // we reached the end of the board right side
+            if (kol>=Board.COLUMNS) break; // we reached the end of the board right side
             if (board[i][kol]==c)
                 count++;
             else
@@ -90,7 +89,7 @@ public class Game {
         if (count >= Game.WIN) return true;
         // keep counting down
         kol = colIndex-1;
-        for (int i=rowIndex+1; i < Board.getROWS(); i++) {
+        for (int i=rowIndex+1; i < Board.ROWS; i++) {
             if (kol<0) break; // we reached the end of the board left side
             if (board[i][kol]==c)
                 count++;
@@ -115,8 +114,8 @@ public class Game {
         if (count >= Game.WIN) return true; // won diagonal "\"
         // keep counting down
         kol = colIndex+1;
-        for (int i=rowIndex+1; i < Board.getROWS(); i++) {
-            if (kol>=Board.getCOLUMNS()) break; // we reached the end of the board right side
+        for (int i=rowIndex+1; i < Board.ROWS; i++) {
+            if (kol>=Board.COLUMNS) break; // we reached the end of the board right side
             if (board[i][kol]==c)
                 count++;
             else
@@ -145,33 +144,25 @@ public class Game {
                 return;
             }
 
-            //Board.setROWS(4);    // optional
-            //Board.setCOLUMNS(4); // optional
-
-            int rows = Board.getROWS();
-            int columns = Board.getCOLUMNS();
-
-            board = new char[rows][columns];
+            board= new Board();
+            //board= new DecoratedBoard();
 
             // start the game
-            Board.initializeBoard(board);
-            System.out.println();
-
-            userInterface.printBoard(board); // empty board
+            userInterface.printBoard(Board.board); // empty board
             System.out.println("Starting a game of 'Four in a Line'.");
 
             currentPlayer = OPLAYER;
             gameover = false;
             computerplays = false;
 
-            Player computer = null;
+            VirtualPlayer computer = null;
 
             if (choice == 2) {
                 computerplays = true;
                 VirtualPlayerFactory virtualPlayerFactory = new VirtualPlayerFactory();
                 GameModes mode = GameModes.MEDIUM;
                 computer = virtualPlayerFactory.getVirtialPlayer(mode);
-                computer = (Player) DebugProxy.newInstance(new ComputerPlayerMedium());
+                computer = (VirtualPlayer) DebugProxy.newInstance(new VirtualPlayerMedium());
             }
 
             do {
@@ -179,7 +170,7 @@ public class Game {
                 // we request the player to enter a column which is not full
                 do {
                     if (computerplays && currentPlayer == XPLAYER) {
-                        col = computer.MakeAChoise(board);
+                        col = computer.MakeAChoise(Board.board);
                         userInterface.computerPlayerTurn(col);
                     }
                     else
@@ -191,13 +182,14 @@ public class Game {
                     row = -1;
 
                     // is this really a column number?
-                    if (col < 0 || col >= Board.getCOLUMNS()) {
+                    if (col < 0 || col >= Board.COLUMNS)
+                    {
                         System.out.println("Illegal column number");
                     }
                     else {
                         // find the row and check if winning
-                        if (!Board.isColumnFull(board, col)) {
-                            row = Board.firstEmptyRow(board, col);
+                        if (!Board.isColumnFull(col)) {
+                            row = Board.firstEmptyRow(col);
                             System.out.println();
                         } else
                             // column is full, try again
@@ -206,15 +198,15 @@ public class Game {
                 } while (row == -1);
                 // now we have a valid (row,col) cell
 
-                board[row][col] = currentPlayer;
+                Board.board[row][col] = currentPlayer;
 
                 // in any case we print the board
-                userInterface.printBoard(board);
+                userInterface.printBoard(Board.board);
 
-                if (winningDisk(board, row, col)) {
+                if (winningDisk(Board.board, row, col)) {
                     gameover = true;
                     userInterface.showWinner(currentPlayer, computerplays, playerNum(currentPlayer));
-                } else if (Board.boardIsFull(board)) {
+                } else if (Board.boardIsFull()) {
                     gameover = true;
                     userInterface.showWinner(EMPTY, computerplays, playerNum(EMPTY)); // tie
                 }

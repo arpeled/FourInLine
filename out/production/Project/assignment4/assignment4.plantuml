@@ -9,25 +9,25 @@ title __ASSIGNMENT4's Class Diagram__\n
         {static} - ROWS : int
         {static} + boardIsFull()
         {static} + firstEmptyRow()
-        {static} + getCOLUMNS()
-        {static} + getROWS()
+        {static} + COLUMNS
+        {static} + ROWS
         {static} + initializeBoard()
         {static} + isColumnFull()
-        {static} + setCOLUMNS()
+        {static} + setCOLUMNS
         {static} + setROWS()
     }
   }
   
 
   namespace assignment4 {
-    class assignment4.ComputerPlayerEasy {
+    class assignment4.VirtualPlayerEasy {
         + MakeAChoise()
     }
   }
   
 
   namespace assignment4 {
-    class assignment4.ComputerPlayerMedium {
+    class assignment4.VirtualPlayerMedium {
         + MakeAChoise()
     }
   }
@@ -109,7 +109,7 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
-    interface assignment4.Player {
+    interface assignment4.VirtualPlayer {
         {abstract} + MakeAChoise()
     }
   }
@@ -117,8 +117,8 @@ title __ASSIGNMENT4's Class Diagram__\n
 
   namespace assignment4 {
     interface assignment4.UserInterface {
-        {abstract} + ComputerPlayerTurn()
-        {abstract} + HumanPlayerTurn()
+        {abstract} + computerPlayerTurn()
+        {abstract} + humanPlayerTurn()
         {abstract} + exit()
         {abstract} + printBoard()
         {abstract} + printMenu()
@@ -134,9 +134,9 @@ title __ASSIGNMENT4's Class Diagram__\n
   }
   
 
-  assignment4.ComputerPlayerEasy .up.|> assignment4.Player
-  assignment4.ComputerPlayerMedium .up.|> assignment4.Player
-  assignment4.Player .up.|> assignment4.VirtualPlayerFactory
+  assignment4.VirtualPlayerEasy .up.|> assignment4.VirtualPlayer
+  assignment4.VirtualPlayerMedium .up.|> assignment4.VirtualPlayer
+  assignment4.VirtualPlayer .up.|> assignment4.VirtualPlayerFactory
   assignment4.ConsoleUI .up.|> assignment4.UserInterface
   assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
   assignment4.MenuOptions .left.|> assignment4.ConsoleUI
