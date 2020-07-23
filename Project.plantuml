@@ -9,13 +9,7 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
-    class assignment4.VirtualPlayerEasy {
-    }
-  }
-  
-
-  namespace assignment4 {
-    class assignment4.VirtualPlayerMedium {
+    class assignment4.BoardDecorator {
     }
   }
   
@@ -28,6 +22,12 @@ title __PROJECT's Class Diagram__\n
 
   namespace assignment4 {
     class assignment4.DebugProxy {
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.DecoratedBoard {
     }
   }
   
@@ -51,6 +51,12 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
+    class assignment4.LogUI {
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.Main {
     }
   }
@@ -63,19 +69,37 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace assignment4 {
-    interface assignment4.VirtualPlayer {
-    }
-  }
-  
-
-  namespace assignment4 {
     interface assignment4.UserInterface {
     }
   }
   
 
   namespace assignment4 {
+    class assignment4.UserInterfaceDecorator {
+    }
+  }
+  
+
+  namespace assignment4 {
+    interface assignment4.VirtualPlayer {
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.VirtualPlayerEasy {
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.VirtualPlayerFactory {
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.VirtualPlayerMedium {
     }
   }
   
@@ -87,7 +111,7 @@ title __PROJECT's Class Diagram__\n
   
 
   namespace tests {
-    class tests.PlayerTest {
+    class tests.GameTest {
     }
   }
   
@@ -98,12 +122,23 @@ title __PROJECT's Class Diagram__\n
   }
   
 
-  assignment4.VirtualPlayerEasy .up.|> assignment4.VirtualPlayer
-  assignment4.VirtualPlayerMedium .up.|> assignment4.VirtualPlayer
+  namespace tests {
+    class tests.VirtualPlayerTests {
+    }
+  }
+  
+
+  assignment4.BoardDecorator o-- assignment4.Board : board
   assignment4.ConsoleUI .up.|> assignment4.UserInterface
   assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
+  assignment4.DecoratedBoard -up-|> assignment4.BoardDecorator
+  assignment4.LogUI -up-|> assignment4.UserInterfaceDecorator
+  assignment4.UserInterfaceDecorator .up.|> assignment4.UserInterface
+  assignment4.UserInterfaceDecorator o-- assignment4.UserInterface : userInterfaceToBeDecorated
+  assignment4.VirtualPlayerEasy .up.|> assignment4.VirtualPlayer
+  assignment4.VirtualPlayerMedium .up.|> assignment4.VirtualPlayer
   tests.BoardTests o-- assignment4.UserInterface : userInterface
-  tests.PlayerTest o-- assignment4.UserInterface : userInterface
+  tests.VirtualPlayerTests o-- assignment4.UserInterface : userInterface
 
 
 right footer

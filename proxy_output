@@ -1,12 +1,26 @@
-before method MakeAChoise
-[Ljava.lang.Object;@4d7e1886
-after method MakeAChoise
-before method MakeAChoise
-[Ljava.lang.Object;@3cd1a2f1
-after method MakeAChoise
-before method MakeAChoise
-[Ljava.lang.Object;@2f0e140b
-after method MakeAChoise
-before method MakeAChoise
-[Ljava.lang.Object;@7440e464
-after method MakeAChoise
+before method printBoard
+method params: 
+-- char[][] arg0 --
+after method printBoard
+before method printBoard
+method params: 
+-- char[][] arg0 --
+after method printBoard
+before method printBoard
+method params: 
+-- char[][] arg0 --
+after method printBoard
+before method printBoard
+method params: 
+-- char[][] arg0 --
+after method printBoard
+before method printBoard
+method params: 
+-- char[][] arg0 --
+after method printBoard
+before method showWinner
+method params: 
+-- char arg0 --
+-- boolean arg1 --
+-- int arg2 --
+after method showWinner

@@ -130,6 +130,7 @@ public class Game {
     public static void play()
     {
         UserInterface userInterface = new ConsoleUI();
+        userInterface = (UserInterface) DebugProxy.newInstance(new ConsoleUI());
 
         int choice, row, col = 0;
 
@@ -144,7 +145,7 @@ public class Game {
                 return;
             }
 
-            board= new Board();
+            board = new Board();
             //board= new DecoratedBoard();
 
             // start the game
@@ -162,7 +163,7 @@ public class Game {
                 VirtualPlayerFactory virtualPlayerFactory = new VirtualPlayerFactory();
                 GameModes mode = GameModes.MEDIUM;
                 computer = virtualPlayerFactory.getVirtialPlayer(mode);
-                computer = (VirtualPlayer) DebugProxy.newInstance(new VirtualPlayerMedium());
+                //computer = (VirtualPlayer) DebugProxy.newInstance(new VirtualPlayerMedium());
             }
 
             do {

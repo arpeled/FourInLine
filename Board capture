@@ -1,0 +1,430 @@
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | |X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | |O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | |X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | |X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | |X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| |X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | |X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | |X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | |O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | |X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | |X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| |X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | |X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | |X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | |X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | |O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | |X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| |X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | |X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | | |X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | | |X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | | |X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| | |O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+| |X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | | |
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | | |X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | | |X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | | |X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | | |X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| | |X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+| |O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | | |
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | | |X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | | |X|X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | | |X|X|X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | | |X|X|X|X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| | |X|X|X|X|X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+| |X|X|X|X|X|X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+
+Printing board:
+
+|O|X|X|X|X|X|X|
+|X|O|X|X|X|X|X|
+|X|X|O|X|X|X|X|
+|X|X|X|O|X|X|X|
+|X|X|X|X|O|X|X|
+|X|X|X|X|X|O|X|
+---------------
+

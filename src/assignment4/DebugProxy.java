@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 public class DebugProxy implements java.lang.reflect.InvocationHandler
 {
@@ -40,11 +41,19 @@ public class DebugProxy implements java.lang.reflect.InvocationHandler
         try
         {
             writer.println("before method " + m.getName());
-            if (args != null)
-            {
-                writer.println(args.toString());
-            }
+            //if (args != null)
+            //{
+            //    writer.println(args.toString());
+            //}
 
+            if (m.getParameterCount() > 0)
+            {
+                Parameter[] parameters = m.getParameters();
+                writer.println("method params: ");
+                for (Parameter parameter : parameters) {
+                    writer.println("-- " + parameter + " --");
+                }
+            }
             result = m.invoke(obj, args);
         }
         catch (InvocationTargetException e)

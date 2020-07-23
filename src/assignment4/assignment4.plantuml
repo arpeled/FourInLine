@@ -4,31 +4,21 @@ title __ASSIGNMENT4's Class Diagram__\n
 
   namespace assignment4 {
     class assignment4.Board {
+        {static} + COLUMNS : int
         {static} + EMPTY : char
-        {static} - COLUMNS : int
-        {static} - ROWS : int
+        {static} + ROWS : int
+        {static} + board : char[][]
+        + Board()
         {static} + boardIsFull()
         {static} + firstEmptyRow()
-        {static} + COLUMNS
-        {static} + ROWS
-        {static} + initializeBoard()
         {static} + isColumnFull()
-        {static} + setCOLUMNS
-        {static} + setROWS()
     }
   }
   
 
   namespace assignment4 {
-    class assignment4.VirtualPlayerEasy {
-        + MakeAChoise()
-    }
-  }
-  
-
-  namespace assignment4 {
-    class assignment4.VirtualPlayerMedium {
-        + MakeAChoise()
+    class assignment4.BoardDecorator {
+        + BoardDecorator()
     }
   }
   
@@ -36,10 +26,10 @@ title __ASSIGNMENT4's Class Diagram__\n
   namespace assignment4 {
     class assignment4.ConsoleUI {
         ~ terminalInput : Scanner
-        + ComputerPlayerTurn()
         + ConsoleUI()
-        + HumanPlayerTurn()
+        + computerPlayerTurn()
         + exit()
+        + humanPlayerTurn()
         + printBoard()
         + printMenu()
         + showWinner()
@@ -60,12 +50,21 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
+    class assignment4.DecoratedBoard {
+        + backgroundNum : int
+        + DecoratedBoard()
+        + setBackgroundNum()
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.Game {
         {static} + EMPTY : char
         {static} + OPLAYER : char
         {static} + WIN : int
         {static} + XPLAYER : char
-        {static} + board : char[][]
+        {static} + board : Board
         {static} + computerplays : boolean
         {static} + currentPlayer : char
         {static} + gameover : boolean
@@ -93,6 +92,17 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
+    class assignment4.LogUI {
+        {static} - writer : PrintWriter
+        + LogUI()
+        {static} + closeFile()
+        + printBoard()
+        - captureBoard()
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.Main {
         {static} + main()
     }
@@ -109,17 +119,10 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
-    interface assignment4.VirtualPlayer {
-        {abstract} + MakeAChoise()
-    }
-  }
-  
-
-  namespace assignment4 {
     interface assignment4.UserInterface {
         {abstract} + computerPlayerTurn()
-        {abstract} + humanPlayerTurn()
         {abstract} + exit()
+        {abstract} + humanPlayerTurn()
         {abstract} + printBoard()
         {abstract} + printMenu()
         {abstract} + showWinner()
@@ -128,25 +131,65 @@ title __ASSIGNMENT4's Class Diagram__\n
   
 
   namespace assignment4 {
+    class assignment4.UserInterfaceDecorator {
+        + UserInterfaceDecorator()
+        + computerPlayerTurn()
+        + exit()
+        + humanPlayerTurn()
+        + printBoard()
+        + printMenu()
+        + showWinner()
+    }
+  }
+  
+
+  namespace assignment4 {
+    interface assignment4.VirtualPlayer {
+        {abstract} + MakeAChoise()
+    }
+  }
+  
+
+  namespace assignment4 {
+    class assignment4.VirtualPlayerEasy {
+        + MakeAChoise()
+    }
+  }
+  
+
+  namespace assignment4 {
     class assignment4.VirtualPlayerFactory {
+        {static} - virtualPlayerMap : HashMap<String, VirtualPlayer>
         + getVirtialPlayer()
     }
   }
   
 
+  namespace assignment4 {
+    class assignment4.VirtualPlayerMedium {
+        + MakeAChoise()
+    }
+  }
+  
+
+
+  assignment4.ConsoleUI .up.|> assignment4.UserInterface
+  assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
+  assignment4.LogUI -up-|> assignment4.UserInterfaceDecorator
+  assignment4.UserInterfaceDecorator .up.|> assignment4.UserInterface
+  assignment4.UserInterfaceDecorator o-- assignment4.UserInterface : userInterfaceToBeDecorated
   assignment4.VirtualPlayerEasy .up.|> assignment4.VirtualPlayer
   assignment4.VirtualPlayerMedium .up.|> assignment4.VirtualPlayer
   assignment4.VirtualPlayer .up.|> assignment4.VirtualPlayerFactory
-  assignment4.ConsoleUI .up.|> assignment4.UserInterface
-  assignment4.DebugProxy .up.|> java.lang.reflect.InvocationHandler
-  assignment4.MenuOptions .left.|> assignment4.ConsoleUI
-  assignment4.GameModes .right.|> assignment4.VirtualPlayerFactory
+  assignment4.BoardDecorator o-- assignment4.Board : board
+  assignment4.DecoratedBoard -up-|> assignment4.BoardDecorator
+  assignment4.UserInterface .up.|> assignment4.GameModes
+  assignment4.UserInterface .up.|> assignment4.MenuOptions
 
   assignment4.Main --> assignment4.Game
-  assignment4.Game --> assignment4.UserInterface
-  assignment4.Game --> assignment4.Board
+  assignment4.Game ---> assignment4.Board
+  assignment4.Game -> assignment4.UserInterface
   assignment4.Game --> assignment4.VirtualPlayerFactory
-
 
 
 right footer

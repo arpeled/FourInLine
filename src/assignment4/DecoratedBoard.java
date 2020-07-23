@@ -6,6 +6,7 @@ public class DecoratedBoard extends BoardDecorator {
         super();
     }
 
+    // Imagine that there is a database of images, here the index of the selected image is kept
     public int backgroundNum;
 
     public void setBackgroundNum(int backgroundNum) {

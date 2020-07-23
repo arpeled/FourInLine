@@ -4,19 +4,39 @@ title __TESTS's Class Diagram__\n
 
   namespace tests {
     class tests.BoardTests {
-        {static} + board : char[][]
+        {static} + boardI : Board
         + boardIsFullTest()
         + firstEmptyRowTest()
         + fullColTest()
         + initializeBoardTest()
-        + setBoardSizeTest()
     }
   }
   
 
   namespace tests {
-    class tests.PlayerTest {
-        {static} + board : char[][]
+    class tests.GameTest {
+        {static} + board : DecoratedBoard
+        ~ currentPlayer : char
+        ~ gameover : boolean
+        ~ playTest()
+    }
+  }
+  
+
+  namespace tests {
+    class tests.UserInerfaceTests {
+        {static} + board : Board
+        + computerPlayerTurnTest()
+        + printBoardTest()
+        + printMenuTest()
+        + showWinnerTest()
+    }
+  }
+  
+
+  namespace tests {
+    class tests.VirtualPlayerTests {
+        {static} + board : Board
         + computerFullBoardChoiseTest()
         + computerWinnigChoiseEasyTest()
         + computerWinnigChoiseMediumTest()
@@ -24,16 +44,8 @@ title __TESTS's Class Diagram__\n
   }
   
 
-  namespace tests {
-    class tests.UserInerfaceTests {
-        + printBoardTest()
-        + printMenuTest()
-    }
-  }
-  
-
   tests.BoardTests o-- assignment4.UserInterface : userInterface
-  tests.PlayerTest o-- assignment4.UserInterface : userInterface
+  tests.VirtualPlayerTests o-- assignment4.UserInterface : userInterface
 
 
 right footer
