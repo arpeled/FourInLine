@@ -1,12 +1,9 @@
 package assignment4;
 
-import java.util.Scanner;
-
 public class Game {
 
-    // first index is row (horizontal), second is column (vertical)
-    // [0,0] is the top left board cell
-    public static char[][] board = new char[Board.ROWS][Board.COLUMNS];
+    public static Board board;
+    //public static DecoratedBoard board;
 
     // how many discs to win
     public static int WIN = 4;
@@ -37,53 +34,136 @@ public class Game {
         else currentPlayer = OPLAYER;
     }
 
-    public static void showWinner(char winner,boolean isComp) {
-        if (winner == EMPTY)
-            System.out.print("Board is full! game has ended with a tie!");
-        else
-        if (isComp && playerNum(winner)==2) System.out.println("Game has ended! The computer won!");
-        else System.out.println("Game has ended! Player " + playerNum(winner) + " won!");
-        System.out.println();
+    // is the disc at board[rowIndex][colIndex] winning?
+    public static boolean winningDisk(char[][] board, int rowIndex, int colIndex){
+        char c = board[rowIndex][colIndex];
+        int count = 1;
+
+        // horizontal right
+        for (int i=colIndex+1; i < Board.COLUMNS; i++) {
+            if (board[rowIndex][i]==c)
+                count++;
+            else break;
+        }
+        if (count >= Game.WIN)
+        {
+            return true; // won horizontally
+        }
+        // keep counting horizontal left
+        for (int i=colIndex-1; i >=0; i--) {
+            if (board[rowIndex][i]==c)
+                count++;
+            else break;
+        }
+        if (count >= Game.WIN) return true; // won horizontally
+
+        count = 1;
+        // vertical down
+        for (int i=rowIndex+1; i < Board.ROWS; i++) {
+            if (board[i][colIndex]==c)
+                count++;
+            else break;
+        }
+        if (count >= Game.WIN) return true; // won vertical
+        // keep counting vertical up
+        for (int i=rowIndex-1; i >=0; i--) {
+            if (board[i][colIndex]==c)
+                count++;
+            else
+                break;
+        }
+        if (count >= Game.WIN) return true; // won vertical
+
+        // first diagonal:  /
+        count = 1;
+        // up
+        int kol = colIndex+1;
+        for (int i=rowIndex-1; i >= 0; i--) {
+            if (kol>=Board.COLUMNS) break; // we reached the end of the board right side
+            if (board[i][kol]==c)
+                count++;
+            else
+                break;
+            kol++;
+        }
+        if (count >= Game.WIN) return true;
+        // keep counting down
+        kol = colIndex-1;
+        for (int i=rowIndex+1; i < Board.ROWS; i++) {
+            if (kol<0) break; // we reached the end of the board left side
+            if (board[i][kol]==c)
+                count++;
+            else
+                break;
+            kol--;
+        }
+        if (count >= Game.WIN) return true; // won diagonal "/"
+
+        // second diagonal : \
+        count = 1;
+        // up
+        kol = colIndex-1;
+        for (int i=rowIndex-1; i >= 0; i--) {
+            if (kol<0) break; // we reached the end of the board left side
+            if (board[i][kol]==c)
+                count++;
+            else
+                break;
+            kol--;
+        }
+        if (count >= Game.WIN) return true; // won diagonal "\"
+        // keep counting down
+        kol = colIndex+1;
+        for (int i=rowIndex+1; i < Board.ROWS; i++) {
+            if (kol>=Board.COLUMNS) break; // we reached the end of the board right side
+            if (board[i][kol]==c)
+                count++;
+            else
+                break;
+            kol++;
+        }
+        if (count >= Game.WIN) return true; // won diagonal "\"
+
+        return false;
     }
 
     public static void play()
     {
-        Scanner terminalInput = new Scanner(System.in);
+        UserInterface userInterface = new ConsoleUI();
+        userInterface = (UserInterface) DebugProxy.newInstance(new ConsoleUI());
 
-        int choice, row, col;
-        boolean badchoice = true;
+        int choice, row, col = 0;
 
         // each loop is a new game
         while (true) {
 
-            do {
-                badchoice = false;
-                Menu.printMenu();
-                choice = Integer.parseInt(terminalInput.nextLine()); // no exception handling...
-                badchoice = choice < 0 || choice > 2;
-                if (badchoice) {
-                    System.out.println("Input incorrect! Please try again.");
-                }
-            } while (badchoice);
+            choice = userInterface.printMenu();
 
             // 0: quit the game
-            if (choice == 0) {
-                System.out.println("Bye bye!");
-                terminalInput.close();
+            if (choice == MenuOptions.Exit.ordinal()) {
+                userInterface.exit();
                 return;
             }
-            // start the game
-            Board.initializeBoard(board);
-            System.out.println();
 
-            Board.printBoard(board); // empty board
+            board = new Board();
+            //board= new DecoratedBoard();
+
+            // start the game
+            userInterface.printBoard(Board.board); // empty board
             System.out.println("Starting a game of 'Four in a Line'.");
 
             currentPlayer = OPLAYER;
             gameover = false;
             computerplays = false;
+
+            VirtualPlayer computer = null;
+
             if (choice == 2) {
                 computerplays = true;
+                VirtualPlayerFactory virtualPlayerFactory = new VirtualPlayerFactory();
+                GameModes mode = GameModes.MEDIUM;
+                computer = virtualPlayerFactory.getVirtialPlayer(mode);
+                //computer = (VirtualPlayer) DebugProxy.newInstance(new VirtualPlayerMedium());
             }
 
             do {
@@ -91,13 +171,12 @@ public class Game {
                 // we request the player to enter a column which is not full
                 do {
                     if (computerplays && currentPlayer == XPLAYER) {
-                        col = VirtualPlayer.computerChoice(board);
-                        System.out.print("Computer put a disk in column ");
-                        System.out.println(col + 1);
-                        //System.out.println();
-                    } else {
-                        System.out.print("Player " + playerNum(currentPlayer) + ", choose a column: ");
-                        col = Integer.parseInt(terminalInput.nextLine()); // no exception handling...
+                        col = computer.MakeAChoise(Board.board);
+                        userInterface.computerPlayerTurn(col);
+                    }
+                    else
+                    {
+                        col = userInterface.humanPlayerTurn(playerNum(currentPlayer));
                         col--; // the real index
                     }
 
@@ -105,35 +184,39 @@ public class Game {
 
                     // is this really a column number?
                     if (col < 0 || col >= Board.COLUMNS)
+                    {
                         System.out.println("Illegal column number");
-                    else
+                    }
+                    else {
                         // find the row and check if winning
-                        if (!Board.isColumnFull(board, col)) {
-                            row = Board.firstEmptyRow(board, col);
+                        if (!Board.isColumnFull(col)) {
+                            row = Board.firstEmptyRow(col);
                             System.out.println();
                         } else
                             // column is full, try again
                             System.out.println("Column is full.");
-
+                    }
                 } while (row == -1);
                 // now we have a valid (row,col) cell
 
-                board[row][col] = currentPlayer;
+                Board.board[row][col] = currentPlayer;
 
                 // in any case we print the board
-                Board.printBoard(board);
+                userInterface.printBoard(Board.board);
 
-                if (Board.winningDisk(board, row, col)) {
+                if (winningDisk(Board.board, row, col)) {
                     gameover = true;
-                    showWinner(currentPlayer, computerplays);
-                } else if (Board.boardIsFull(board)) {
+                    userInterface.showWinner(currentPlayer, computerplays, playerNum(currentPlayer));
+                } else if (Board.boardIsFull()) {
                     gameover = true;
-                    showWinner(EMPTY, computerplays); // tie
+                    userInterface.showWinner(EMPTY, computerplays, playerNum(EMPTY)); // tie
                 }
                 // switch to next player
                 changePlayer();
 
             } while (!gameover);
+
+            DebugProxy.close_inner_file();
         }
     }
 }
